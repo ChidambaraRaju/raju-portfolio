@@ -1,0 +1,29 @@
+{
+  "certifications": [
+    {
+      "title": "Agentic AI Expert",
+      "provider": "ReadyTensor",
+      "link": "https://app.readytensor.ai/certificates/6050a66e-55fc-4213-8504-b5e6d067f2ef"
+    },
+    {
+      "title": "LLM Finetuning Specialist",
+      "provider": "ReadyTensor",
+      "link": "https://app.readytensor.ai/certificates/f6404ab0-fbbd-4ffc-82b3-1c2266556882"
+    },
+    {
+      "title": "Ultimate RAG Bootcamp with LangChain, LangGraph & LangSmith",
+      "provider": "Udemy",
+      "link": "https://www.udemy.com/certificate/UC-8e44cb7c-5e9a-4127-94ba-7d444eacbcde/"
+    },
+    {
+      "title": "Complete Agentic AI Bootcamp with LangGraph and LangChain",
+      "provider": "Udemy",
+      "link": "https://www.udemy.com/certificate/UC-657cfb90-3418-4fdd-89cf-88891d27a1c0/"
+    },
+    {
+      "title": "A Deep Understanding of Deep Learning",
+      "provider": "Udemy",
+      "link": "https://www.udemy.com/certificate/UC-a87e3adb-9020-4bed-8c93-3019144b1636/"
+    }
+  ]
+}
