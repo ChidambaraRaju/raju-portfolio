@@ -57,3 +57,5 @@ docs/plans/
 
 # Claude Code (local)
 .claude/
+
+.vercel
