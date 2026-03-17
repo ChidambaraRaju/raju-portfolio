@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mail, Github, Linkedin, Sparkles, ExternalLink } from "lucide-react";
+import { ArrowRight, Mail, Github, Linkedin, Sparkles, ExternalLink, Cpu } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -141,6 +141,19 @@ export default function Hero() {
           >
             <Sparkles className="w-5 h-5 text-text-secondary hover:text-accent-purple-light" />
             <span className="text-text-secondary hover:text-accent-purple-light transition-colors">ReadyTensor</span>
+            <ExternalLink className="w-4 h-4 text-text-muted" />
+          </a>
+          <a
+            href="https://huggingface.co/justjuu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-3 rounded-lg glass hover:bg-accent-purple/20 hover:border-accent-purple/50 transition-all hover:scale-110"
+            aria-label="Hugging Face"
+          >
+            <Cpu className="w-5 h-5 text-text-secondary hover:text-accent-purple-light" />
+            <span className="text-text-secondary hover:text-accent-purple-light transition-colors text-sm font-medium">
+              Hugging Face
+            </span>
             <ExternalLink className="w-4 h-4 text-text-muted" />
           </a>
         </motion.div>
