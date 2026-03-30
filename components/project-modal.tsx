@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Github, ExternalLink, Play, Sparkles } from "lucide-react";
+import { Github, ExternalLink, Play, Sparkles, FileText } from "lucide-react";
 
 interface ProjectModalProps {
   project: Project | null;
