@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Github, ExternalLink, Play, FileText } from "lucide-react";
+import { Github, ExternalLink, Play, Sparkles } from "lucide-react";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -44,7 +44,7 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
   });
 
   const hasLinks =
-    project.links.github || project.links.demo || project.links.publication;
+    project.links.github || project.links.demo || project.links.publication || project.links.model;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -138,7 +138,21 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
                     className="flex items-center gap-2"
                   >
                     <FileText className="w-4 h-4" />
-                    Publication
+                    Read
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </Button>
+              )}
+              {project.links.model && (
+                <Button variant="outline" asChild>
+                  <a
+                    href={project.links.model}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    Model
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </Button>

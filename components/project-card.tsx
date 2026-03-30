@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Project } from "@/lib/content";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Github, ExternalLink, FileText, Play } from "lucide-react";
+import { Github, ExternalLink, Sparkles, Play, FileText } from "lucide-react";
 
 interface ProjectCardProps {
   project: Project;
@@ -68,6 +68,18 @@ export default function ProjectCard({ project, index, onClick }: ProjectCardProp
             >
               <FileText className="w-4 h-4" />
               Read
+            </a>
+          )}
+          {project.links.model && (
+            <a
+              href={project.links.model}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-2 px-3 py-2 text-sm rounded-lg border border-accent-purple/30 text-accent-purple-light hover:bg-accent-purple/10 hover:border-accent-purple/50 transition-colors"
+            >
+              <Sparkles className="w-4 h-4" />
+              Model
             </a>
           )}
         </CardFooter>
