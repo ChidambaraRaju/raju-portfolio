@@ -131,6 +131,11 @@ function getProjectMetadata(slug: string): { icon: string; shortDescription: str
       icon: "🧠",
       shortDescription: "Built and trained a decoder-only GPT-style language model (~49M params) from scratch using PyTorch on ~1B tokens from FineWeb dataset.",
       displayName: "Building GPT from Scratch"
+    },
+    "pixelpersona": {
+      icon: "💬",
+      shortDescription: "RAG-powered AI chat system where each historical persona — Einstein, Tesla, Gandhi — is an autonomous LangGraph agent wired to a dedicated vector database.",
+      displayName: "PixelPersona"
     }
   };
 
