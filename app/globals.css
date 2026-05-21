@@ -3,17 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --primary-dark: #0a0a0f;
-  --primary-light: #1a1a2e;
-  --accent-purple: #8b5cf6;
-  --accent-purple-light: #a78bfa;
-  --accent-blue: #3b82f6;
-  --accent-teal: #14b8a6;
+  --primary-dark: #07070a;
+  --primary-light: #0d0d15;
+  --accent-primary: #10b981;
+  --accent-primary-light: #34d399;
+  --accent-primary-dark: #059669;
+  --accent-secondary: #06b6d4;
+  --accent-secondary-light: #22d3ee;
+  --accent-warm: #f59e0b;
+  --accent-warm-light: #fbbf24;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-accent: rgba(139, 92, 246, 0.5);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-accent: rgba(16, 185, 129, 0.25);
 }
 
 * {
@@ -28,7 +31,7 @@ body {
   overflow-x: hidden;
   background-color: var(--primary-dark);
   color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -40,36 +43,36 @@ a {
 
 @layer utilities {
   .glass {
-    background: rgba(10, 10, 15, 0.7);
+    background: rgba(7, 7, 10, 0.65);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .glass-strong {
-    background: rgba(10, 10, 15, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(13, 13, 21, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    background: linear-gradient(135deg, #10b981, #06b6d4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .glow {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
   }
 
   .glow-strong {
-    box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 0 50px rgba(16, 185, 129, 0.25);
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
   }
 
   .scrollbar-hide::-webkit-scrollbar {
@@ -80,48 +83,75 @@ a {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  .noise-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    content: "";
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
 }
 
 /* Markdown styles */
 .markdown-content h1 {
-  font-size: 2rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 2.25rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
   color: var(--text-primary);
 }
 
 .markdown-content h2 {
-  font-size: 1.5rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.5rem;
+}
+
+.markdown-content h3 {
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1.35rem;
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   color: var(--text-primary);
 }
 
-.markdown-content h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
 .markdown-content p {
-  margin-bottom: 1rem;
-  line-height: 1.75;
+  margin-bottom: 1.25rem;
+  line-height: 1.8;
   color: var(--text-secondary);
 }
 
 .markdown-content ul,
 .markdown-content ol {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   padding-left: 1.5rem;
   color: var(--text-secondary);
 }
 
 .markdown-content li {
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
+  margin-bottom: 0.6rem;
+  line-height: 1.7;
 }
 
 .markdown-content strong {
@@ -130,57 +160,58 @@ a {
 }
 
 .markdown-content a {
-  color: var(--accent-purple);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  color: var(--accent-primary);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent-primary);
+  transition: all 0.2s ease;
 }
 
 .markdown-content a:hover {
-  color: var(--accent-purple-light);
+  color: var(--accent-primary-light);
+  border-bottom-style: solid;
 }
 
 .markdown-content code {
-  background: rgba(139, 92, 246, 0.1);
-  color: var(--accent-purple-light);
+  background: rgba(16, 185, 129, 0.08);
+  color: var(--accent-primary-light);
   padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
+  font-family: monospace;
 }
 
 .markdown-content pre {
-  background: rgba(26, 26, 46, 0.8);
+  background: rgba(13, 13, 21, 0.7);
   border: 1px solid var(--border-subtle);
-  border-radius: 0.5rem;
-  padding: 1rem;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
   overflow-x: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .markdown-content pre code {
   background: none;
   padding: 0;
   color: var(--text-primary);
+  font-size: 0.9em;
 }
 
 .markdown-content blockquote {
-  border-left: 3px solid var(--accent-purple);
-  padding-left: 1rem;
-  margin: 1rem 0;
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
   color: var(--text-secondary);
   font-style: italic;
+  background: rgba(16, 185, 129, 0.02);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .markdown-content hr {
   border: none;
   border-top: 1px solid var(--border-subtle);
-  margin: 1.5rem 0;
-}
-
-/* Grid pattern background */
-.grid-pattern {
-  background-image: linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
+  margin: 2rem 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

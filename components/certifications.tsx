@@ -1,86 +1,79 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, ExternalLink } from "lucide-react";
 import { Certification } from "@/lib/content";
+import SectionHeading from "@/components/section-heading";
 
 interface CertificationsProps {
   certifications: Certification[];
 }
 
-function CertificationCard({ certification, index }: { certification: Certification; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
-    >
-      <Card className="h-full hover:border-accent-purple/50 hover:shadow-glow transition-all duration-300 cursor-pointer">
-        <CardContent className="p-5">
-          <div className="flex items-start gap-3 mb-3">
-            <div className="p-2 rounded-lg bg-accent-purple/20">
-              <Award className="w-5 h-5 text-accent-purple-light" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-sm font-semibold text-text-primary mb-1 hover:text-accent-purple-light transition-colors">
-                {certification.title}
-              </h3>
-              <Badge variant="secondary" className="text-xs">
-                {certification.provider}
-              </Badge>
-            </div>
-          </div>
-          <a
-            href={certification.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs text-text-muted hover:text-accent-purple-light transition-colors"
-          >
-            View Certificate
-            <ExternalLink className="w-3 h-3" />
-          </a>
-        </CardContent>
-      </Card>
-    </motion.div>
-  );
-}
-
 export default function Certifications({ certifications }: CertificationsProps) {
   return (
-    <section className="py-24 px-6 relative">
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.6 }}
-        className="max-w-6xl mx-auto"
-      >
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl md:text-4xl font-bold mb-12 text-center"
-        >
-          Certifications
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "80px" }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="h-1 bg-gradient-primary mx-auto mt-4 rounded-full"
-          />
-        </motion.h2>
+    <section id="certifications" className="py-24 px-6 relative">
+      <div className="max-w-4xl mx-auto">
+        <SectionHeading 
+          number="03" 
+          title="Certifications" 
+          subtitle="Accredited technical credentials in Artificial Intelligence" 
+        />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Elegant Timeline / Compact List Layout */}
+        <div className="relative border-l border-border-subtle pl-6 sm:pl-8 ml-2 sm:ml-4 space-y-12">
+          
           {certifications.map((cert, index) => (
-            <CertificationCard key={index} certification={cert} index={index} />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
+              className="relative group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-xl border border-border-subtle bg-primary-light/5 hover:bg-primary-light/20 hover:border-accent-primary/20 transition-all duration-300 shadow-sm"
+            >
+              {/* Vertical timeline node indicator */}
+              <div className="absolute -left-[31px] sm:-left-[39px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-primary-dark bg-primary-dark flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+                <div className="w-1.5 h-1.5 rounded-full bg-accent-primary group-hover:bg-accent-secondary transition-colors duration-300" />
+              </div>
+
+              {/* Certification info */}
+              <div className="flex items-start gap-4 flex-1">
+                <div className="p-2.5 rounded-lg border border-border-subtle bg-primary-dark/80 text-text-secondary group-hover:text-accent-primary group-hover:border-accent-primary/20 transition-all duration-300">
+                  <Award className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-text-primary group-hover:text-accent-primary transition-colors duration-300">
+                    {cert.title}
+                  </h3>
+                  
+                  {/* Provider badge */}
+                  <div className="mt-1.5">
+                    <Badge variant="secondary" className="px-2 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider">
+                      {cert.provider}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+
+              {/* External verify link */}
+              <motion.a
+                href={cert.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-accent-primary font-mono uppercase tracking-wider font-semibold border border-border-subtle group-hover:border-accent-primary/20 bg-primary-dark/50 px-4 py-2 rounded-lg transition-all duration-300"
+              >
+                <span>Verify</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </motion.a>
+              
+            </motion.div>
           ))}
+          
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

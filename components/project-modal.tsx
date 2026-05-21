@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Project } from "@/lib/content";
 import {
   Dialog,
@@ -22,7 +21,9 @@ interface ProjectModalProps {
 }
 
 const SectionTitle = ({ children }: { children: React.ReactNode }) => (
-  <h3 className="text-lg font-semibold text-gradient mb-3 mt-6">{children}</h3>
+  <h3 className="font-mono text-xs font-bold uppercase tracking-widest text-accent-primary mb-3 mt-6">
+    // {children}
+  </h3>
 );
 
 export default function ProjectModal({ project, open, onOpenChange }: ProjectModalProps) {
@@ -51,7 +52,10 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
       <DialogClose onClick={() => onOpenChange(false)} />
 
       <DialogHeader>
-        <DialogTitle>{project.displayName}</DialogTitle>
+        <DialogTitle className="flex items-center gap-3">
+          <span className="text-3xl">{project.icon}</span>
+          <span>{project.displayName}</span>
+        </DialogTitle>
       </DialogHeader>
 
       <DialogContent>
@@ -77,16 +81,16 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
                   remarkPlugins={[remarkGfm]}
                   components={{
                     p: ({ children }) => (
-                      <p className="text-text-secondary leading-relaxed mb-3">{children}</p>
+                      <p className="text-text-secondary leading-relaxed mb-3 text-sm md:text-base font-sans">{children}</p>
                     ),
                     ul: ({ children }) => (
-                      <ul className="list-disc list-inside text-text-secondary space-y-2 mb-3 ml-4">{children}</ul>
+                      <ul className="list-disc list-inside text-text-secondary space-y-2 mb-3 ml-2 text-sm md:text-base">{children}</ul>
                     ),
                     li: ({ children }) => (
-                      <li className="text-text-secondary leading-relaxed">{children}</li>
+                      <li className="text-text-secondary leading-relaxed pl-1">{children}</li>
                     ),
                     strong: ({ children }) => (
-                      <strong className="text-accent-purple-light font-semibold">{children}</strong>
+                      <strong className="text-accent-primary-light font-bold">{children}</strong>
                     ),
                   }}
                 >
@@ -100,7 +104,7 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
         {hasLinks && (
           <div className="mt-8 pt-6 border-t border-border-subtle">
             <SectionTitle>Links</SectionTitle>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 mt-4">
               {project.links.github && (
                 <Button variant="default" asChild>
                   <a
@@ -110,8 +114,8 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
                     className="flex items-center gap-2"
                   >
                     <Github className="w-4 h-4" />
-                    GitHub Repository
-                    <ExternalLink className="w-3 h-3" />
+                    <span>GitHub Repository</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-60" />
                   </a>
                 </Button>
               )}
@@ -124,8 +128,8 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
                     className="flex items-center gap-2"
                   >
                     <Play className="w-4 h-4" />
-                    Live Demo
-                    <ExternalLink className="w-3 h-3" />
+                    <span>Live Demo</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-60" />
                   </a>
                 </Button>
               )}
@@ -138,8 +142,8 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
                     className="flex items-center gap-2"
                   >
                     <FileText className="w-4 h-4" />
-                    Read
-                    <ExternalLink className="w-3 h-3" />
+                    <span>Read Publication</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-60" />
                   </a>
                 </Button>
               )}
@@ -152,8 +156,8 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
                     className="flex items-center gap-2"
                   >
                     <Sparkles className="w-4 h-4" />
-                    Model
-                    <ExternalLink className="w-3 h-3" />
+                    <span>Hugging Face Model</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-60" />
                   </a>
                 </Button>
               )}

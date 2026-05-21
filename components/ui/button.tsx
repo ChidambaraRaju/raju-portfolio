@@ -3,23 +3,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple focus-visible:ring-offset-2 focus-visible:ring-offset-primary-dark disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold tracking-wide uppercase transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-dark disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-primary text-white shadow-lg hover:shadow-glow hover:scale-105 active:scale-95",
+          "bg-gradient-primary text-primary-dark font-bold shadow-md hover:shadow-accent-primary/20 hover:scale-[1.02] active:scale-95 border border-accent-primary/20",
         secondary:
-          "glass text-accent-purple-light border border-accent-purple/30 hover:bg-accent-purple/10 hover:border-accent-purple/50 hover:scale-105",
+          "glass text-text-primary border border-border-subtle hover:bg-accent-primary/5 hover:border-accent-primary/20 hover:scale-[1.02]",
         ghost:
-          "text-accent-purple-light hover:bg-accent-purple/10 hover:scale-105",
+          "text-text-secondary hover:text-accent-primary hover:bg-accent-primary/5 hover:scale-[1.02]",
         outline:
-          "border border-accent-purple/50 text-accent-purple-light hover:bg-accent-purple/10 hover:scale-105",
+          "border border-accent-primary/30 text-accent-primary hover:bg-accent-primary/5 hover:scale-[1.02]",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 px-3 text-xs",
-        lg: "h-12 px-6 text-base",
+        default: "h-10 px-5 py-2",
+        sm: "h-9 px-4 text-xs",
+        lg: "h-12 px-6 text-sm tracking-widest",
         icon: "h-10 w-10",
       },
     },

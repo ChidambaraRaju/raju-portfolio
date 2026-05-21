@@ -59,3 +59,6 @@ docs/plans/
 .claude/
 
 .vercel
+
+# Antigravity (ECC config & rules)
+.agent/

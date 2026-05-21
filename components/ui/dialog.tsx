@@ -26,17 +26,17 @@ const Dialog = ({ open, onOpenChange, children }: DialogProps) => {
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.96, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              exit={{ opacity: 0, scale: 0.96, y: 15 }}
               transition={{
                 type: "spring",
-                damping: 25,
-                stiffness: 300,
+                damping: 28,
+                stiffness: 320,
               }}
               className={cn(
                 "relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-strong rounded-2xl scrollbar-hide",
-                "border border-accent-purple/20 shadow-glow-strong"
+                "border border-accent-primary/20 shadow-glow-strong"
               )}
             >
               {children}
@@ -70,7 +70,7 @@ const DialogTitle = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      "text-2xl font-semibold leading-none tracking-tight text-gradient",
+      "text-2xl font-display font-bold leading-none tracking-tight text-gradient uppercase",
       className
     )}
     {...props}
@@ -96,7 +96,7 @@ const DialogClose = React.forwardRef<
     ref={ref}
     onClick={onClick}
     className={cn(
-      "absolute right-4 top-4 rounded-lg p-2 text-text-muted hover:text-text-primary hover:bg-accent-purple/20 transition-colors",
+      "absolute right-4 top-4 rounded-lg p-2 text-text-muted hover:text-accent-primary hover:bg-accent-primary/10 transition-colors",
       className
     )}
     {...props}
