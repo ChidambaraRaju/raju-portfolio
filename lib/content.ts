@@ -127,10 +127,10 @@ function getProjectMetadata(slug: string): { icon: string; shortDescription: str
       shortDescription: "Fine-tuned Qwen2.5-0.5B model using QLoRA for empathetic medical Q&A, demonstrating efficient domain adaptation with improved ROUGE metrics.",
       displayName: "Domain Adaptation of SLM using QLoRA"
     },
-    "pico-gpt": {
-      icon: "🧠",
-      shortDescription: "Built and trained a decoder-only GPT-style language model (~49M params) from scratch using PyTorch on ~1B tokens from FineWeb dataset.",
-      displayName: "Building GPT from Scratch"
+    "story-gpt": {
+      icon: "📖",
+      shortDescription: "Pretrained a ~57M parameter decoder-only StoryGPT model from scratch on TinyStories (3.28B tokens) to generate coherent short stories.",
+      displayName: "StoryGPT — Pretraining SLM from Scratch"
     },
     "pixelpersona": {
       icon: "💬",
