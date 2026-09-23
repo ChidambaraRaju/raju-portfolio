@@ -10,44 +10,44 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        display: ["var(--font-space-grotesk)", "sans-serif"],
+        sans: ["var(--font-outfit)", "sans-serif"],
+        display: ["var(--font-instrument)", "serif"],
       },
       colors: {
         primary: {
-          dark: "#0a0a0f",
-          light: "#12121a",
+          dark: "#0c0b09",
+          light: "#171512",
         },
         accent: {
           primary: {
-            DEFAULT: "#10b981",
-            light: "#34d399",
-            dark: "#059669",
+            DEFAULT: "#c6a57a",
+            light: "#e4d2b4",
+            dark: "#8f7350",
           },
           secondary: {
-            DEFAULT: "#06b6d4",
-            light: "#22d3ee",
-            dark: "#0891b2",
+            DEFAULT: "#a89880",
+            light: "#d9cbb8",
+            dark: "#7a6b58",
           },
           warm: {
-            DEFAULT: "#f59e0b",
-            light: "#fbbf24",
-            dark: "#d97706",
+            DEFAULT: "#c6a57a",
+            light: "#e4d2b4",
+            dark: "#8f7350",
           },
         },
         text: {
-          primary: "#f8fafc",
-          secondary: "#94a3b8",
-          muted: "#64748b",
+          primary: "#f6f1e8",
+          secondary: "#b7b0a4",
+          muted: "#7c756b",
         },
         border: {
-          subtle: "rgba(255, 255, 255, 0.08)",
-          accent: "rgba(16, 185, 129, 0.4)",
+          subtle: "rgba(246, 241, 232, 0.12)",
+          accent: "rgba(198, 165, 122, 0.45)",
         },
       },
       backgroundImage: {
-        "gradient-primary": "linear-gradient(135deg, #10b981, #06b6d4)",
-        "gradient-glow": "linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15))",
+        "gradient-primary": "linear-gradient(135deg, #e4d2b4, #c6a57a)",
+        "gradient-glow": "linear-gradient(135deg, rgba(198, 165, 122, 0.16), rgba(228, 210, 180, 0.05))",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
       animation: {

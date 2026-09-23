@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --primary-dark: #07070a;
-  --primary-light: #0d0d15;
-  --accent-primary: #10b981;
-  --accent-primary-light: #34d399;
-  --accent-primary-dark: #059669;
-  --accent-secondary: #06b6d4;
-  --accent-secondary-light: #22d3ee;
-  --accent-warm: #f59e0b;
-  --accent-warm-light: #fbbf24;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --border-subtle: rgba(255, 255, 255, 0.05);
-  --border-accent: rgba(16, 185, 129, 0.25);
+  --primary-dark: #0c0b09;
+  --primary-light: #171512;
+  --accent-primary: #c6a57a;
+  --accent-primary-light: #e4d2b4;
+  --accent-primary-dark: #8f7350;
+  --accent-secondary: #a89880;
+  --accent-secondary-light: #d9cbb8;
+  --accent-warm: #c6a57a;
+  --accent-warm-light: #e4d2b4;
+  --text-primary: #f6f1e8;
+  --text-secondary: #b7b0a4;
+  --text-muted: #7c756b;
+  --border-subtle: rgba(246, 241, 232, 0.12);
+  --border-accent: rgba(198, 165, 122, 0.45);
 }
 
 * {
@@ -43,36 +43,36 @@ a {
 
 @layer utilities {
   .glass {
-    background: rgba(7, 7, 10, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(23, 21, 18, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(246, 241, 232, 0.12);
   }
 
   .glass-strong {
-    background: rgba(13, 13, 21, 0.85);
+    background: rgba(23, 21, 18, 0.94);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(246, 241, 232, 0.14);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #10b981, #06b6d4);
+    background: linear-gradient(135deg, #f6f1e8, #c6a57a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .glow {
-    box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
   }
 
   .glow-strong {
-    box-shadow: 0 0 50px rgba(16, 185, 129, 0.25);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
   }
 
   .text-glow {
-    text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    text-shadow: none;
   }
 
   .scrollbar-hide::-webkit-scrollbar {
@@ -91,7 +91,7 @@ a {
     width: 100vw;
     height: 100vh;
     content: "";
-    opacity: 0.02;
+    opacity: 0.035;
     pointer-events: none;
     z-index: 9999;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -99,15 +99,15 @@ a {
 
   .grid-pattern {
     background-image: 
-      linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+      linear-gradient(rgba(246, 241, 232, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(246, 241, 232, 0.035) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 }
 
 /* Markdown styles */
 .markdown-content h1 {
-  font-family: var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-instrument), serif;
   font-size: 2.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -116,7 +116,7 @@ a {
 }
 
 .markdown-content h2 {
-  font-family: var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-instrument), serif;
   font-size: 1.75rem;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -128,7 +128,7 @@ a {
 }
 
 .markdown-content h3 {
-  font-family: var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-instrument), serif;
   font-size: 1.35rem;
   font-weight: 600;
   margin-top: 1.5rem;
@@ -172,16 +172,16 @@ a {
 }
 
 .markdown-content code {
-  background: rgba(16, 185, 129, 0.08);
+  background: rgba(198, 165, 122, 0.12);
   color: var(--accent-primary-light);
-  padding: 0.2rem 0.4rem;
+  padding: 0.15rem 0.4rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
-  font-family: monospace;
+  font-family: var(--font-outfit), sans-serif;
 }
 
 .markdown-content pre {
-  background: rgba(13, 13, 21, 0.7);
+  background: rgba(23, 21, 18, 0.85);
   border: 1px solid var(--border-subtle);
   border-radius: 0.75rem;
   padding: 1.25rem;
@@ -202,7 +202,7 @@ a {
   margin: 1.5rem 0;
   color: var(--text-secondary);
   font-style: italic;
-  background: rgba(16, 185, 129, 0.02);
+  background: rgba(198, 165, 122, 0.06);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   border-radius: 0 0.5rem 0.5rem 0;

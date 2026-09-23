@@ -1,94 +1,63 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Code,
-  Flame,
-  Smile,
-  Link as LinkIcon,
-  GitGraph,
-  MonitorPlay,
-  Zap,
-  Box,
-} from "lucide-react";
 import SectionHeading from "@/components/section-heading";
 
-// Skill to icon mapping
-const skillIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  "Python": Code,
-  "PyTorch": Flame,
-  "Hugging Face": Smile,
-  "LangChain": LinkIcon,
-  "LangGraph": GitGraph,
-  "Streamlit": MonitorPlay,
-  "FastAPI": Zap,
-  "Docker": Box,
-};
+const GROUPS: { label: string; match: string[] }[] = [
+  { label: "Models", match: ["Python", "PyTorch", "Hugging Face"] },
+  { label: "Agents", match: ["LangChain", "LangGraph"] },
+  { label: "Systems", match: ["FastAPI", "Streamlit", "Docker", "Redis"] },
+];
 
 interface SkillsProps {
   skills: string[];
 }
 
 export default function Skills({ skills }: SkillsProps) {
+  const assigned = new Set<string>();
+  const groups = GROUPS.map((group) => {
+    const items = group.match.filter((skill) => skills.includes(skill));
+    items.forEach((item) => assigned.add(item));
+    return { label: group.label, items };
+  }).filter((group) => group.items.length > 0);
+
+  const remaining = skills.filter((skill) => !assigned.has(skill));
+  if (remaining.length > 0) {
+    groups.push({ label: "Also", items: remaining });
+  }
+
   return (
-    <section id="skills" className="py-24 px-6 relative">
+    <section id="skills" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading 
-          number="02" 
-          title="Tech Stack" 
-          subtitle="Engineering capabilities & deep learning technologies" 
+        <SectionHeading
+          number="03 — Stack"
+          title="Tools I ship with"
+          subtitle="A short set, used across training, agents, and deployment."
         />
 
-        {/* Elegant flowing pill/tag wrap layout */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.08,
-              },
-            },
-          }}
-          className="flex flex-wrap gap-4 justify-start items-center relative z-10"
-        >
-          {skills.map((skill) => {
-            const Icon = skillIcons[skill] || Code;
-            return (
-              <motion.div
-                key={skill}
-                variants={{
-                  hidden: { opacity: 0, scale: 0.9, y: 15 },
-                  visible: { 
-                    opacity: 1, 
-                    scale: 1, 
-                    y: 0,
-                    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } 
-                  },
-                }}
-                whileHover={{ y: -3, scale: 1.02 }}
-                className="group cursor-pointer flex items-center gap-3 px-6 py-4 rounded-xl border border-border-subtle bg-primary-light/10 hover:bg-accent-primary/5 hover:border-accent-primary/30 transition-all duration-300 shadow-sm relative overflow-hidden"
-              >
-                {/* Visual active tech indicator dot */}
-                <div className="w-1.5 h-1.5 rounded-full bg-accent-primary opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Tech Icon */}
-                <Icon className="w-5 h-5 text-text-secondary group-hover:text-accent-primary transition-colors duration-300" />
-                
-                {/* Skill Name */}
-                <span className="font-mono text-sm md:text-base font-semibold tracking-wide text-text-secondary group-hover:text-text-primary transition-colors duration-300">
-                  {skill}
-                </span>
-
-                {/* Ambient glow in hover */}
-                <div className="absolute inset-0 -z-10 bg-gradient-radial from-accent-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.div>
-            );
-          })}
-        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border-subtle border border-border-subtle">
+          {groups.map((group, index) => (
+            <motion.div
+              key={group.label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+              className="bg-primary-dark p-8 md:p-10"
+            >
+              <p className="text-sm tracking-[0.16em] uppercase text-accent-primary mb-6">
+                {group.label}
+              </p>
+              <ul className="space-y-3">
+                {group.items.map((skill) => (
+                  <li key={skill} className="text-xl md:text-2xl text-text-primary font-display">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

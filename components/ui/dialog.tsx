@@ -21,7 +21,7 @@ const Dialog = ({ open, onOpenChange, children }: DialogProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-[#0c0b09]/75 backdrop-blur-md"
             onClick={() => onOpenChange?.(false)}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -35,8 +35,8 @@ const Dialog = ({ open, onOpenChange, children }: DialogProps) => {
                 stiffness: 320,
               }}
               className={cn(
-                "relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-strong rounded-2xl scrollbar-hide",
-                "border border-accent-primary/20 shadow-glow-strong"
+                "relative w-full max-w-3xl max-h-[88vh] overflow-y-auto glass-strong rounded-2xl scrollbar-hide",
+                "border border-border-subtle shadow-2xl shadow-black/40"
               )}
             >
               {children}
@@ -70,7 +70,7 @@ const DialogTitle = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      "text-2xl font-display font-bold leading-none tracking-tight text-gradient uppercase",
+      "text-3xl md:text-4xl font-display font-normal leading-tight tracking-tight text-text-primary",
       className
     )}
     {...props}
@@ -96,7 +96,7 @@ const DialogClose = React.forwardRef<
     ref={ref}
     onClick={onClick}
     className={cn(
-      "absolute right-4 top-4 rounded-lg p-2 text-text-muted hover:text-accent-primary hover:bg-accent-primary/10 transition-colors",
+      "absolute right-4 top-4 z-20 rounded-full p-2 text-text-muted hover:text-text-primary transition-colors",
       className
     )}
     {...props}

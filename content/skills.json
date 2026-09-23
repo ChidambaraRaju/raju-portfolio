@@ -7,6 +7,7 @@
     "LangGraph",
     "Streamlit",
     "FastAPI",
-    "Docker"
+    "Docker",
+    "Redis"
   ]
 }

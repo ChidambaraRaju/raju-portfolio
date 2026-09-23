@@ -1,6 +1,7 @@
 "use client";
 
 import { Project } from "@/lib/content";
+import { publicationBriefs } from "@/lib/publication-briefs";
 import {
   Dialog,
   DialogHeader,
@@ -8,11 +9,7 @@ import {
   DialogContent,
   DialogClose,
 } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { Github, ExternalLink, Play, Sparkles, FileText } from "lucide-react";
+import { Github, ArrowUpRight, Play, Sparkles, FileText } from "lucide-react";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -20,148 +17,58 @@ interface ProjectModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const SectionTitle = ({ children }: { children: React.ReactNode }) => (
-  <h3 className="font-mono text-xs font-bold uppercase tracking-widest text-accent-primary mb-3 mt-6">
-    // {children}
-  </h3>
-);
-
 export default function ProjectModal({ project, open, onOpenChange }: ProjectModalProps) {
   if (!project) return null;
 
-  // Extract sections from markdown content
-  const sections: Record<string, string> = {};
-  let currentSection = "";
-  const contentLines = project.content.split("\n");
+  const brief = publicationBriefs[project.slug];
 
-  contentLines.forEach((line) => {
-    const headingMatch = line.match(/^##\s+(.+)$/);
-    if (headingMatch) {
-      currentSection = headingMatch[1];
-      sections[currentSection] = "";
-    } else if (currentSection) {
-      sections[currentSection] += line + "\n";
-    }
-  });
-
-  const hasLinks =
-    project.links.github || project.links.demo || project.links.publication || project.links.model;
+  const links = [
+    project.links.github && { href: project.links.github, label: "GitHub", icon: Github },
+    project.links.demo && { href: project.links.demo, label: "Live demo", icon: Play },
+    project.links.publication && { href: project.links.publication, label: "Publication", icon: FileText },
+    project.links.model && { href: project.links.model, label: "Model", icon: Sparkles },
+  ].filter(Boolean) as { href: string; label: string; icon: typeof Github }[];
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogClose onClick={() => onOpenChange(false)} />
 
-      <DialogHeader>
-        <DialogTitle className="flex items-center gap-3">
-          <span className="text-3xl">{project.icon}</span>
-          <span>{project.displayName}</span>
-        </DialogTitle>
+      <DialogHeader className="text-left">
+        <p className="text-sm tracking-[0.16em] uppercase text-accent-primary">Publication</p>
+        <DialogTitle>{brief?.title ?? project.displayName}</DialogTitle>
       </DialogHeader>
 
       <DialogContent>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.tags.map((tag) => (
-            <Badge key={tag} variant="default">
-              {tag}
-            </Badge>
-          ))}
-        </div>
+        {brief ? (
+          <div className="space-y-6">
+            <p className="text-text-secondary leading-relaxed">{brief.summary}</p>
+            <ul className="space-y-3">
+              {brief.points.map((point) => (
+                <li key={point} className="text-sm text-text-secondary leading-relaxed pl-4 border-l border-accent-primary/40">
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p className="text-text-secondary leading-relaxed">{project.shortDescription}</p>
+        )}
 
-        <div className="markdown-content prose prose-invert max-w-none">
-          {Object.entries(sections).map(([sectionTitle, sectionContent]) => {
-            // Skip Overview as it's shown in the title
-            if (sectionTitle === "Overview" || sectionTitle === "Links" || !sectionContent.trim()) {
-              return null;
-            }
-
-            return (
-              <div key={sectionTitle}>
-                <SectionTitle>{sectionTitle}</SectionTitle>
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    p: ({ children }) => (
-                      <p className="text-text-secondary leading-relaxed mb-3 text-sm md:text-base font-sans">{children}</p>
-                    ),
-                    ul: ({ children }) => (
-                      <ul className="list-disc list-inside text-text-secondary space-y-2 mb-3 ml-2 text-sm md:text-base">{children}</ul>
-                    ),
-                    li: ({ children }) => (
-                      <li className="text-text-secondary leading-relaxed pl-1">{children}</li>
-                    ),
-                    strong: ({ children }) => (
-                      <strong className="text-accent-primary-light font-bold">{children}</strong>
-                    ),
-                  }}
-                >
-                  {sectionContent}
-                </ReactMarkdown>
-              </div>
-            );
-          })}
-        </div>
-
-        {hasLinks && (
-          <div className="mt-8 pt-6 border-t border-border-subtle">
-            <SectionTitle>Links</SectionTitle>
-            <div className="flex flex-wrap gap-3 mt-4">
-              {project.links.github && (
-                <Button variant="default" asChild>
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>GitHub Repository</span>
-                    <ExternalLink className="w-3.5 h-3.5 opacity-60" />
-                  </a>
-                </Button>
-              )}
-              {project.links.demo && (
-                <Button variant="secondary" asChild>
-                  <a
-                    href={project.links.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <Play className="w-4 h-4" />
-                    <span>Live Demo</span>
-                    <ExternalLink className="w-3.5 h-3.5 opacity-60" />
-                  </a>
-                </Button>
-              )}
-              {project.links.publication && (
-                <Button variant="outline" asChild>
-                  <a
-                    href={project.links.publication}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <FileText className="w-4 h-4" />
-                    <span>Read Publication</span>
-                    <ExternalLink className="w-3.5 h-3.5 opacity-60" />
-                  </a>
-                </Button>
-              )}
-              {project.links.model && (
-                <Button variant="outline" asChild>
-                  <a
-                    href={project.links.model}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    <span>Hugging Face Model</span>
-                    <ExternalLink className="w-3.5 h-3.5 opacity-60" />
-                  </a>
-                </Button>
-              )}
-            </div>
+        {links.length > 0 && (
+          <div className="mt-8 pt-6 border-t border-border-subtle flex flex-wrap gap-x-6 gap-y-3">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent-primary-light transition-colors"
+              >
+                <link.icon className="w-4 h-4" />
+                {link.label}
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            ))}
           </div>
         )}
       </DialogContent>
