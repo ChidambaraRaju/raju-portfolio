@@ -31,42 +31,46 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogClose onClick={() => onOpenChange(false)} />
-
-      <DialogHeader className="text-left">
-        <p className="text-sm tracking-[0.16em] uppercase text-accent-primary">Publication</p>
+      <DialogHeader>
+        <DialogClose onClick={() => onOpenChange(false)} />
+        <p className="text-sm text-fg-muted">
+          {brief ? "From the publication" : project.displayName}
+        </p>
         <DialogTitle>{brief?.title ?? project.displayName}</DialogTitle>
       </DialogHeader>
 
       <DialogContent>
         {brief ? (
-          <div className="space-y-6">
-            <p className="text-text-secondary leading-relaxed">{brief.summary}</p>
-            <ul className="space-y-3">
+          <div className="space-y-7">
+            <p className="text-lg leading-relaxed text-fg">{brief.summary}</p>
+            <ul className="space-y-4">
               {brief.points.map((point) => (
-                <li key={point} className="text-sm text-text-secondary leading-relaxed pl-4 border-l border-accent-primary/40">
+                <li
+                  key={point}
+                  className="border-l border-plasma-pink/60 pl-4 text-sm leading-relaxed text-fg-muted"
+                >
                   {point}
                 </li>
               ))}
             </ul>
           </div>
         ) : (
-          <p className="text-text-secondary leading-relaxed">{project.shortDescription}</p>
+          <p className="leading-relaxed text-fg-muted">{project.shortDescription}</p>
         )}
 
         {links.length > 0 && (
-          <div className="mt-8 pt-6 border-t border-border-subtle flex flex-wrap gap-x-6 gap-y-3">
+          <div className="mt-8 flex flex-wrap gap-2.5 border-t border-line pt-6">
             {links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent-primary-light transition-colors"
+                className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-fg/[0.04] px-4 py-2 text-sm text-fg transition-colors hover:border-fg/40 hover:bg-fg/[0.09]"
               >
-                <link.icon className="w-4 h-4" />
+                <link.icon className="h-4 w-4" />
                 {link.label}
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <ArrowUpRight className="h-3.5 w-3.5 text-fg-muted" />
               </a>
             ))}
           </div>

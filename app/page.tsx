@@ -2,8 +2,7 @@ import Navigation from "@/components/navigation";
 import Hero from "@/components/hero";
 import WorkList from "@/components/work-list";
 import About from "@/components/about";
-import Skills from "@/components/skills";
-import Certifications from "@/components/certifications";
+import Toolkit from "@/components/toolkit";
 import Contact from "@/components/contact";
 import { getAboutContent, getSkills, getCertifications, getProjects } from "@/lib/content";
 
@@ -16,13 +15,12 @@ export default async function Home() {
   ]);
 
   return (
-    <main className="min-h-screen bg-primary-dark">
+    <main className="min-h-screen bg-ink">
       <Navigation />
       <Hero />
       <WorkList projects={projects} />
       <About content={aboutContent} />
-      <Skills skills={skills} />
-      <Certifications certifications={certifications} />
+      <Toolkit skills={skills} certifications={certifications} />
       <Contact />
     </main>
   );

@@ -15,6 +15,11 @@ export interface Certification {
   link: string;
 }
 
+export interface ProjectMetric {
+  value: string;
+  label: string;
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -25,6 +30,7 @@ export interface Project {
   icon: string;  // Emoji icon for project
   outcome: string;
   disciplines: string[];
+  metric: ProjectMetric;  // One headline figure shown beside the project
   links: {
     github?: string;
     demo?: string;
@@ -116,6 +122,7 @@ function getProjectMetadata(slug: string): {
   displayName: string;
   outcome: string;
   disciplines: string[];
+  metric: ProjectMetric;
 } {
   const metadata: Record<string, {
     icon: string;
@@ -123,6 +130,7 @@ function getProjectMetadata(slug: string): {
     displayName: string;
     outcome: string;
     disciplines: string[];
+    metric: ProjectMetric;
   }> = {
     "capital-compass": {
       icon: "📊",
@@ -130,6 +138,7 @@ function getProjectMetadata(slug: string): {
       displayName: "Capital Compass",
       outcome: "A multi-agent desk that turns market data and sentiment into an invest, hold, or pass.",
       disciplines: ["LangGraph", "Multi-agent", "Finance"],
+      metric: { value: "5 agents", label: "one LangGraph workflow" },
     },
     "license-plate-rt-detr": {
       icon: "👁️",
@@ -137,6 +146,7 @@ function getProjectMetadata(slug: string): {
       displayName: "License Plate Recognition",
       outcome: "Real-time plate detection with RT-DETR and a tuned OCR pipeline.",
       disciplines: ["RT-DETR", "OCR", "Computer vision"],
+      metric: { value: "0.97", label: "mAP@0.5 on held-out test" },
     },
     "medical-slm-qlora": {
       icon: "⚕️",
@@ -144,6 +154,7 @@ function getProjectMetadata(slug: string): {
       displayName: "Medical SLM with QLoRA",
       outcome: "Qwen2.5-0.5B adapted with QLoRA for empathetic clinical question answering.",
       disciplines: ["QLoRA", "Qwen", "Fine-tuning"],
+      metric: { value: "0.22 → 0.26", label: "ROUGE-1 after fine-tuning" },
     },
     "story-gpt": {
       icon: "📖",
@@ -151,6 +162,7 @@ function getProjectMetadata(slug: string): {
       displayName: "StoryGPT",
       outcome: "A 57M decoder-only model pretrained from scratch on TinyStories.",
       disciplines: ["Pretraining", "Transformers", "TinyStories"],
+      metric: { value: "57M", label: "parameters, from scratch" },
     },
     "pixelpersona": {
       icon: "💬",
@@ -158,6 +170,7 @@ function getProjectMetadata(slug: string): {
       displayName: "PixelPersona",
       outcome: "Historical figures as LangGraph agents, each with its own retrieval store.",
       disciplines: ["RAG", "LangGraph", "Personas"],
+      metric: { value: "4 personas", label: "one vector store each" },
     },
   };
 
@@ -167,6 +180,7 @@ function getProjectMetadata(slug: string): {
     displayName: slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
     outcome: "An applied AI system built end to end.",
     disciplines: ["Applied AI"],
+    metric: { value: "End to end", label: "data to deployment" },
   };
 }
 
@@ -221,6 +235,7 @@ export async function getProjects(): Promise<Project[]> {
       icon: metadata.icon,
       outcome: metadata.outcome,
       disciplines: metadata.disciplines,
+      metric: metadata.metric,
       tags: metadata.disciplines.length > 0 ? metadata.disciplines : (tags.length > 0 ? tags : ["AI", "Machine Learning"]),
       links,
       content,

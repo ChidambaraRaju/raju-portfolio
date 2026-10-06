@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import SectionHeading from "@/components/section-heading";
@@ -11,71 +8,36 @@ interface AboutProps {
 
 export default function About({ content }: AboutProps) {
   return (
-    <section id="about" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="about" className="px-6 py-24 md:py-32">
+      <div className="mx-auto max-w-6xl">
         <SectionHeading
-          number="02 — About"
           title="How I work"
           subtitle="From experiment to a system someone can actually use."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-          <motion.blockquote
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-4 font-display italic text-2xl md:text-3xl leading-snug text-text-primary"
-          >
-            Bridging foundational research and production systems.
-          </motion.blockquote>
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+          <blockquote className="lg:col-span-5">
+            <span aria-hidden="true" className="mb-6 block h-1 w-14 rounded-full bg-plasma" />
+            <p className="text-balance text-3xl font-semibold leading-[1.1] tracking-[-0.03em] text-fg md:text-4xl">
+              Bridging foundational research and production systems.
+            </p>
+          </blockquote>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.08 }}
-            className="lg:col-span-8"
-          >
-            <div className="markdown-content max-w-none">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  h1: () => null,
-                  h2: ({ children }) => (
-                    <h2 className="font-display text-2xl text-text-primary mb-3 mt-8">{children}</h2>
-                  ),
-                  h3: ({ children }) => (
-                    <h3 className="text-lg text-text-primary mb-2 mt-6">{children}</h3>
-                  ),
-                  p: ({ children }) => (
-                    <p className="text-text-secondary leading-relaxed mb-4 text-base">{children}</p>
-                  ),
-                  ul: ({ children }) => (
-                    <ul className="list-disc list-inside text-text-secondary space-y-2 mb-4 ml-1">{children}</ul>
-                  ),
-                  li: ({ children }) => (
-                    <li className="text-text-secondary leading-relaxed">{children}</li>
-                  ),
-                  strong: ({ children }) => (
-                    <strong className="text-text-primary font-medium">{children}</strong>
-                  ),
-                  a: ({ href, children }) => (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent-primary-light border-b border-accent-primary/40 hover:border-accent-primary-light"
-                    >
-                      {children}
-                    </a>
-                  ),
-                }}
-              >
-                {content}
-              </ReactMarkdown>
-            </div>
-          </motion.div>
+          <div className="markdown-content max-w-2xl lg:col-span-7 [&>p:first-of-type]:text-xl [&>p:first-of-type]:leading-relaxed [&>p:first-of-type]:text-fg">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: () => null,
+                a: ({ href, children }) => (
+                  <a href={href} target="_blank" rel="noopener noreferrer">
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          </div>
         </div>
       </div>
     </section>

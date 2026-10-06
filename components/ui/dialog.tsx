@@ -12,6 +12,15 @@ interface DialogProps {
 }
 
 const Dialog = ({ open, onOpenChange, children }: DialogProps) => {
+  React.useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onOpenChange?.(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onOpenChange]);
+
   return (
     <AnimatePresence>
       {open && (
@@ -21,11 +30,17 @@ const Dialog = ({ open, onOpenChange, children }: DialogProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-[#0c0b09]/75 backdrop-blur-md"
-            onClick={() => onOpenChange?.(false)}
+            className="fixed inset-0 z-50 bg-ink/70 backdrop-blur-md"
           />
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            onClick={(event) => {
+              if (event.target === event.currentTarget) onOpenChange?.(false);
+            }}
+          >
             <motion.div
+              role="dialog"
+              aria-modal="true"
               initial={{ opacity: 0, scale: 0.96, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 15 }}
@@ -34,12 +49,9 @@ const Dialog = ({ open, onOpenChange, children }: DialogProps) => {
                 damping: 28,
                 stiffness: 320,
               }}
-              className={cn(
-                "relative w-full max-w-3xl max-h-[88vh] overflow-y-auto glass-strong rounded-2xl scrollbar-hide",
-                "border border-border-subtle shadow-2xl shadow-black/40"
-              )}
+              className="plasma-edge glass-strong w-full max-w-3xl overflow-hidden rounded-3xl shadow-panel"
             >
-              {children}
+              <div className="max-h-[88vh] overflow-y-auto scrollbar-hide">{children}</div>
             </motion.div>
           </div>
         </>
@@ -55,7 +67,7 @@ const DialogHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-col space-y-1.5 text-center sm:text-left p-6 border-b border-border-subtle sticky top-0 glass-strong z-10",
+      "sticky top-0 z-10 flex flex-col gap-2 border-b border-line glass-strong p-6 pr-16 md:p-8 md:pr-20",
       className
     )}
     {...props}
@@ -70,7 +82,7 @@ const DialogTitle = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      "text-3xl md:text-4xl font-display font-normal leading-tight tracking-tight text-text-primary",
+      "text-balance text-2xl font-semibold leading-tight tracking-[-0.03em] text-fg md:text-3xl",
       className
     )}
     {...props}
@@ -82,7 +94,7 @@ const DialogContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6", className)} {...props}>
+  <div ref={ref} className={cn("p-6 md:p-8", className)} {...props}>
     {children}
   </div>
 ));
@@ -94,14 +106,16 @@ const DialogClose = React.forwardRef<
 >(({ className, onClick, ...props }, ref) => (
   <button
     ref={ref}
+    type="button"
+    aria-label="Close"
     onClick={onClick}
     className={cn(
-      "absolute right-4 top-4 z-20 rounded-full p-2 text-text-muted hover:text-text-primary transition-colors",
+      "absolute right-4 top-4 z-20 rounded-full border border-line p-2 text-fg-muted transition-colors hover:border-line-strong hover:text-fg md:right-6 md:top-6",
       className
     )}
     {...props}
   >
-    <X className="h-5 w-5" />
+    <X className="h-4 w-4" />
   </button>
 ));
 DialogClose.displayName = "DialogClose";

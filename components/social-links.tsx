@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Github, Linkedin, Sparkles, Cpu, ArrowUpRight } from "lucide-react";
 
 interface SocialLinksProps {
@@ -38,7 +35,7 @@ const SOCIAL_ITEMS = [
 export default function SocialLinks({ mode = "compact", className = "" }: SocialLinksProps) {
   if (mode === "compact") {
     return (
-      <div className={`flex items-center gap-2 ${className}`}>
+      <div className={`flex items-center gap-1 ${className}`}>
         {SOCIAL_ITEMS.map((item) => {
           const Icon = item.icon;
           return (
@@ -47,11 +44,11 @@ export default function SocialLinks({ mode = "compact", className = "" }: Social
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative p-2.5 text-text-secondary hover:text-accent-primary transition-colors"
+              className="group relative rounded-full p-2.5 text-fg-muted transition-colors hover:bg-fg/[0.06] hover:text-fg"
               aria-label={item.name}
             >
-              <Icon className="w-5 h-5" />
-              <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 text-[11px] text-text-secondary opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              <Icon className="h-5 w-5" />
+              <span className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-fg-muted opacity-0 transition-opacity group-hover:opacity-100">
                 {item.name}
               </span>
             </a>
@@ -62,30 +59,26 @@ export default function SocialLinks({ mode = "compact", className = "" }: Social
   }
 
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border-subtle border border-border-subtle ${className}`}>
-      {SOCIAL_ITEMS.map((item, index) => {
+    <div className={`grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 ${className}`}>
+      {SOCIAL_ITEMS.map((item) => {
         const Icon = item.icon;
         return (
-          <motion.a
+          <a
             key={item.name}
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="group flex flex-col gap-4 bg-primary-dark p-6 hover:bg-primary-light transition-colors"
+            className="group flex flex-col gap-8 rounded-2xl border border-line bg-ink-raised p-6 transition-all duration-300 hover:-translate-y-1 hover:border-line-strong hover:bg-ink-high"
           >
             <div className="flex items-center justify-between">
-              <Icon className="w-5 h-5 text-accent-primary" />
-              <ArrowUpRight className="w-4 h-4 text-text-muted group-hover:text-accent-primary transition-colors" />
+              <Icon className="h-5 w-5 text-fg" />
+              <ArrowUpRight className="h-4 w-4 text-fg-faint transition-colors group-hover:text-plasma-amber" />
             </div>
             <div>
-              <h3 className="text-lg text-text-primary">{item.name}</h3>
-              <p className="mt-1 text-sm text-text-muted">{item.description}</p>
+              <h3 className="text-lg font-medium text-fg">{item.name}</h3>
+              <p className="mt-1 text-sm text-fg-muted">{item.description}</p>
             </div>
-          </motion.a>
+          </a>
         );
       })}
     </div>
