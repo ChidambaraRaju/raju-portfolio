@@ -1,17 +1,16 @@
-import type { Metadata } from "next";
-import { Instrument_Serif, Outfit } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  axes: ["opsz"],
+  variable: "--font-bricolage",
 });
 
-const instrumentSerif = Instrument_Serif({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument",
+  variable: "--font-jetbrains",
 });
 
 export const metadata: Metadata = {
@@ -25,17 +24,18 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#070912",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${outfit.variable} ${instrumentSerif.variable}`}>
-      <body className="font-sans antialiased text-text-primary bg-primary-dark">
-        <div className="noise-bg" />
-        {children}
-      </body>
+    <html lang="en" className={`dark ${bricolage.variable} ${jetbrainsMono.variable}`}>
+      <body className="font-sans antialiased text-fg bg-ink">{children}</body>
     </html>
   );
 }

@@ -6,16 +6,15 @@ export default async function ProjectsPage() {
   const projects = await getProjects();
 
   return (
-    <main className="min-h-screen bg-primary-dark">
+    <main className="min-h-screen bg-ink">
       <Navigation />
 
-      <section className="pt-36 pb-4 px-6">
-        <div className="max-w-6xl mx-auto">
-          <p className="mb-3 text-sm tracking-[0.18em] uppercase text-accent-primary">Work</p>
-          <h1 className="font-display text-5xl md:text-7xl tracking-tight text-text-primary">
+      <section className="px-6 pb-4 pt-40">
+        <div className="mx-auto max-w-6xl">
+          <h1 className="text-5xl font-bold leading-[0.95] tracking-[-0.04em] text-fg md:text-7xl">
             Selected systems
           </h1>
-          <p className="mt-4 max-w-xl text-text-secondary leading-relaxed">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-fg-muted">
             Case studies in agents, fine-tuning, and computer vision.
           </p>
         </div>
