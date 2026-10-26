@@ -109,8 +109,8 @@ function extractLinksFromContent(content: string): Project["links"] {
  * Get project metadata (icon, short description, display name) by slug
  */
 const PROJECT_ORDER = [
+  "reportlens",
   "capital-compass",
-  "pixelpersona",
   "medical-slm-qlora",
   "license-plate-rt-detr",
   "story-gpt",
@@ -132,6 +132,14 @@ function getProjectMetadata(slug: string): {
     disciplines: string[];
     metric: ProjectMetric;
   }> = {
+    "reportlens": {
+      icon: "📑",
+      shortDescription: "Agentic multimodal RAG that answers questions about a 175-page annual report from its text, tables, and charts, citing the page for every fact.",
+      displayName: "ReportLens",
+      outcome: "An agent that reads a 175-page annual report's text, tables, and charts, and cites the page for every answer.",
+      disciplines: ["Multimodal RAG", "LangChain", "LlamaParse"],
+      metric: { value: "$0.0003", label: "per question, one search" },
+    },
     "capital-compass": {
       icon: "📊",
       shortDescription: "Agentic AI system automating investment research using multi-agent workflows to analyze financial data, sentiment, and generate actionable recommendations.",
@@ -163,14 +171,6 @@ function getProjectMetadata(slug: string): {
       outcome: "A 57M decoder-only model pretrained from scratch on TinyStories.",
       disciplines: ["Pretraining", "Transformers", "TinyStories"],
       metric: { value: "57M", label: "parameters, from scratch" },
-    },
-    "pixelpersona": {
-      icon: "💬",
-      shortDescription: "RAG-powered AI chat system where each historical persona — Einstein, Tesla, Gandhi — is an autonomous LangGraph agent wired to a dedicated vector database.",
-      displayName: "PixelPersona",
-      outcome: "Historical figures as LangGraph agents, each with its own retrieval store.",
-      disciplines: ["RAG", "LangGraph", "Personas"],
-      metric: { value: "4 personas", label: "one vector store each" },
     },
   };
 

@@ -15,7 +15,7 @@ export default async function ProjectsPage() {
             Selected systems
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-fg-muted">
-            Case studies in agents, fine-tuning, and computer vision.
+            Case studies in multimodal RAG, agents, fine-tuning, and computer vision.
           </p>
         </div>
       </section>

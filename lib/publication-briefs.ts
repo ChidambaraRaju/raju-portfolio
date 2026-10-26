@@ -9,6 +9,16 @@ export interface PublicationBrief {
  * Not rewritten beyond light trimming of the source wording.
  */
 export const publicationBriefs: Record<string, PublicationBrief> = {
+  reportlens: {
+    title: "ReportLens: Agentic Multimodal RAG with Page-Cited Answers from Text, Tables and Charts",
+    summary:
+      "ReportLens is an agentic, multimodal RAG system that answers questions about one long PDF, using its text, tables, and charts, and cites the page for each fact. It was tested on NVIDIA's 2026 Annual Report (175 pages).",
+    points: [
+      "LlamaParse's agentic tier reads each page with a vision model and returns tables as HTML. The report becomes 377 text chunks plus 12 chart descriptions from DeepSeek-V4.1-Flash, embedded with Jina v5 into Chroma.",
+      "A LangChain agent searches only when needed, attaches the image of any retrieved chart before calling the model, cites pages, and refuses when the report is silent.",
+      "All six test questions were answered correctly with page citations. A question takes 3 to 7 seconds and costs about $0.0003 when it makes one search.",
+    ],
+  },
   "capital-compass": {
     title: "Capital Compass: An Agentic AI Application for Investment Research",
     summary:
@@ -17,16 +27,6 @@ export const publicationBriefs: Record<string, PublicationBrief> = {
       "Specialized agents cover financials, news sentiment, and web research, followed by a critique layer and a final report.",
       "The report recommends Invest, Do Not Invest, or Hold.",
       "Stack listed in the publication: Streamlit, LangChain / LangGraph, Groq, Alpha Vantage, Tavily, and Python.",
-    ],
-  },
-  pixelpersona: {
-    title: "Pixelpersona - Meet the Great Minds",
-    summary:
-      "PixelPersona is a RAG-powered AI chat system where each persona — Einstein, Nikola Tesla, APJ Abdul Kalam, Mahatma Gandhi — is an autonomous LangGraph agent wired to a dedicated vector database. When you ask Gandhi about his philosophy of nonviolent resistance, the system retrieves chunks from Wikipedia articles and Wikiquote quotes, then generates a response grounded in that context.",
-    points: [
-      "Embeddings use BAAI/bge-small-en-v1.5 (384 dimensions) and are stored in Chroma, one collection per persona.",
-      "Queries are rephrased with llama-3.1-8b-instant on Groq. The persona agent uses openai/gpt-oss-20b on Groq.",
-      "The browser UI is a pixel-art chat that talks to a FastAPI backend.",
     ],
   },
   "medical-slm-qlora": {

@@ -20,7 +20,7 @@ export default function WorkList({ projects, showHeading = true }: WorkListProps
         {showHeading && (
           <SectionHeading
             title="Selected systems"
-            subtitle="Agents, fine-tuning, and computer vision. Open any row for the publication brief and links."
+            subtitle="Multimodal RAG, agents, fine-tuning, and computer vision. Open any row for the publication brief and links."
           />
         )}
 
