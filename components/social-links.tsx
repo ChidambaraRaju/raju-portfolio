@@ -1,4 +1,5 @@
-import { Github, Linkedin, Sparkles, Cpu, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, Sparkles, ArrowUpRight } from "lucide-react";
+import HuggingFace from "@/components/icons/hugging-face";
 
 interface SocialLinksProps {
   mode?: "compact" | "labeled";
@@ -27,7 +28,7 @@ const SOCIAL_ITEMS = [
   {
     name: "Hugging Face",
     url: "https://huggingface.co/justjuu",
-    icon: Cpu,
+    icon: HuggingFace,
     description: "Models and demos",
   },
 ];
